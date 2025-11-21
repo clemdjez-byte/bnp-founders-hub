@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { mockProducts } from "@/lib/mockData";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const riskColors = {
   1: "bg-green-100 text-green-800",
@@ -16,6 +16,15 @@ const riskColors = {
 
 export default function Invest() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const filterType = searchParams.get('type');
+  const filterRisk = searchParams.get('risk');
+
+  const filteredProducts = mockProducts.filter(product => {
+    if (filterType && product.type !== filterType) return false;
+    if (filterRisk && product.riskScore !== parseInt(filterRisk)) return false;
+    return true;
+  });
 
   const handleRequestProposal = (product: typeof mockProducts[0]) => {
     navigate('/recap', { state: { fromInvest: true, product } });
@@ -78,8 +87,9 @@ export default function Invest() {
 
       {/* Product Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {mockProducts.map((product) => (
-          <Card key={product.id} className="p-6 hover:shadow-lg transition-shadow">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <Card key={product.id} className="p-6 hover:shadow-lg transition-shadow">
             <div className="space-y-4">
               <div className="flex items-start justify-between">
                 <div className="space-y-2">
@@ -121,8 +131,13 @@ export default function Invest() {
                 Request Proposal
               </Button>
             </div>
-          </Card>
-        ))}
+            </Card>
+          ))
+        ) : (
+          <div className="col-span-2 text-center py-12">
+            <p className="text-muted-foreground">Aucun produit ne correspond à vos critères.</p>
+          </div>
+        )}
       </div>
     </div>
   );
