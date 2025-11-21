@@ -6,15 +6,15 @@ import mistralLogo from "@/assets/mistral-logo.svg";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 
 const navigation = [{
-  id: "dashboard",
-  label: "Net Worth",
-  icon: PieChart,
-  path: "/dashboard"
-}, {
   id: "assets",
   label: "Assets",
   icon: Diamond,
   path: "/assets"
+}, {
+  id: "dashboard",
+  label: "Net Worth",
+  icon: PieChart,
+  path: "/dashboard"
 }, {
   id: "invest",
   label: "Invest",
