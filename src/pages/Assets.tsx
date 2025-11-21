@@ -41,19 +41,6 @@ export default function Assets() {
         </p>
       </div>
 
-      {/* Asset Modules Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {assetModules.map((module) => (
-          <AssetCard
-            key={module.title}
-            title={module.title}
-            subtitle={module.subtitle}
-            icon={module.icon}
-            onClick={() => {}}
-          />
-        ))}
-      </div>
-
       {/* Assets Table */}
       <Card className="p-6">
         <div className="space-y-4">
@@ -113,6 +100,19 @@ export default function Assets() {
           </div>
         </div>
       </Card>
+
+      {/* Asset Modules Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {assetModules.map((module) => (
+          <AssetCard
+            key={module.title}
+            title={module.title}
+            subtitle={module.subtitle}
+            icon={module.icon}
+            onClick={() => {}}
+          />
+        ))}
+      </div>
     </div>
   );
 }
