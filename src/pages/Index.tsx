@@ -243,7 +243,7 @@ const Index = () => {
       onMouseLeave={handleMouseUp}
     >
       {/* Total valorisation en haut à droite */}
-      <div className="fixed top-8 right-8 z-50 backdrop-blur-xl border border-border/30 rounded-2xl px-6 py-4">
+      <div className="fixed top-8 right-8 z-50 border border-border/30 rounded-2xl px-6 py-4 bg-transparent">
         <p className="text-xs text-muted-foreground mb-1">Total Assets</p>
         <p className="text-3xl font-bold text-primary glow-primary-sm">
           {new Intl.NumberFormat("fr-FR", {
