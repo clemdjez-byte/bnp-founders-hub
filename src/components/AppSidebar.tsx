@@ -39,7 +39,7 @@ export function AppSidebar() {
   return (
     <Sidebar className="border-r border-sidebar-border">
       <SidebarContent className="bg-sidebar">
-        <div className="p-6 border-b border-sidebar-border bg-sidebar">
+        <div className="p-6 border-b border-sidebar-border bg-background">
           <img src={bnpLogo} alt="BNP Paribas Asset Management" className="h-12 w-auto" />
         </div>
 
