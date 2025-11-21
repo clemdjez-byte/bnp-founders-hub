@@ -212,7 +212,7 @@ export const mockAssets = [
     type: "Cash Available",
     label: "Cash Available",
     entity: "Personal",
-    value: 850000,
+    value: 500000,
     currency: "EUR",
     performance: "0%",
     isPositive: true,
