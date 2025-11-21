@@ -1,54 +1,62 @@
-import { mockAllocationByClass } from "@/lib/mockData";
-import { useEffect, useState } from "react";
+import { mockAssets } from "@/lib/mockData";
+import { useEffect, useState, useRef } from "react";
+import { Landmark, TrendingUp, Wallet, Bitcoin, Building2 } from "lucide-react";
 
 interface Bubble {
-  id: number;
-  name: string;
+  id: string;
+  label: string;
   value: number;
+  type: string;
   color: string;
   x: number;
   y: number;
   vx: number;
   vy: number;
   size: number;
+  isDragging: boolean;
 }
 
-const colorMap: { [key: string]: string } = {
-  "Stocks & ETFs": "hsl(var(--chart-1))",
-  "Funds": "hsl(var(--chart-2))",
-  "Cash": "hsl(var(--chart-3))",
-  "Crypto": "hsl(var(--chart-4))",
-  "Real Estate": "hsl(var(--chart-5))",
+const typeConfig: { [key: string]: { color: string; icon: any } } = {
+  "Stock": { color: "#3b82f6", icon: TrendingUp },
+  "Fund": { color: "#8b5cf6", icon: Landmark },
+  "Cash": { color: "#10b981", icon: Wallet },
+  "Crypto": { color: "#f59e0b", icon: Bitcoin },
+  "Real Estate": { color: "#ef4444", icon: Building2 },
 };
 
 const Index = () => {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
+  const [draggedBubble, setDraggedBubble] = useState<string | null>(null);
+  const dragOffset = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const total = mockAllocationByClass.reduce((sum, item) => sum + item.value, 0);
-    
-    const initialBubbles: Bubble[] = mockAllocationByClass.map((item, index) => {
-      const percentage = (item.value / total) * 100;
-      const size = Math.max(80, Math.min(300, percentage * 3));
+    const initialBubbles: Bubble[] = mockAssets.map((asset) => {
+      const size = Math.max(150, Math.min(400, asset.value / 2000));
       
       return {
-        id: index,
-        name: item.name,
-        value: item.value,
-        color: colorMap[item.name] || "hsl(var(--chart-1))",
+        id: asset.id,
+        label: asset.label,
+        value: asset.value,
+        type: asset.type,
+        color: typeConfig[asset.type]?.color || "#3b82f6",
         x: Math.random() * (window.innerWidth - size),
         y: Math.random() * (window.innerHeight - size),
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.5) * 1,
+        vy: (Math.random() - 0.5) * 1,
         size,
+        isDragging: false,
       };
     });
 
     setBubbles(initialBubbles);
+  }, []);
 
+  useEffect(() => {
     const animate = () => {
       setBubbles((prevBubbles) =>
         prevBubbles.map((bubble) => {
+          if (bubble.isDragging) return bubble;
+
           let newX = bubble.x + bubble.vx;
           let newY = bubble.y + bubble.vy;
           let newVx = bubble.vx;
@@ -78,45 +86,103 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background via-background to-muted">
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-        <div className="text-center space-y-6 px-4">
-          <h1 className="text-6xl md:text-8xl font-bold text-foreground animate-fade-in">
-            Votre Patrimoine
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground animate-fade-in">
-            Visualisez votre répartition d'actifs en temps réel
-          </p>
-        </div>
-      </div>
+  const handleMouseDown = (e: React.MouseEvent, bubbleId: string) => {
+    const bubble = bubbles.find(b => b.id === bubbleId);
+    if (!bubble) return;
 
-      {bubbles.map((bubble) => (
-        <div
-          key={bubble.id}
-          className="absolute rounded-full flex items-center justify-center shadow-2xl transition-all duration-100 backdrop-blur-sm hover:scale-110 cursor-pointer"
-          style={{
-            left: `${bubble.x}px`,
-            top: `${bubble.y}px`,
-            width: `${bubble.size}px`,
-            height: `${bubble.size}px`,
-            backgroundColor: `${bubble.color}40`,
-            border: `3px solid ${bubble.color}`,
-          }}
-        >
-          <div className="text-center p-4">
-            <div className="font-bold text-foreground text-lg md:text-xl mb-1">
-              {bubble.name}
-            </div>
-            <div className="text-sm md:text-base text-muted-foreground font-semibold">
-              {new Intl.NumberFormat("fr-FR", {
-                style: "currency",
-                currency: "EUR",
-              }).format(bubble.value)}
+    dragOffset.current = {
+      x: e.clientX - bubble.x,
+      y: e.clientY - bubble.y,
+    };
+    setDraggedBubble(bubbleId);
+    setBubbles(prev => prev.map(b => 
+      b.id === bubbleId ? { ...b, isDragging: true } : b
+    ));
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!draggedBubble) return;
+
+    setBubbles(prev => prev.map(b => {
+      if (b.id === draggedBubble) {
+        return {
+          ...b,
+          x: Math.max(0, Math.min(window.innerWidth - b.size, e.clientX - dragOffset.current.x)),
+          y: Math.max(0, Math.min(window.innerHeight - b.size, e.clientY - dragOffset.current.y)),
+        };
+      }
+      return b;
+    }));
+  };
+
+  const handleMouseUp = () => {
+    if (draggedBubble) {
+      setBubbles(prev => prev.map(b => 
+        b.id === draggedBubble ? { ...b, isDragging: false } : b
+      ));
+      setDraggedBubble(null);
+    }
+  };
+
+  return (
+    <div 
+      className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background via-background to-muted cursor-grab active:cursor-grabbing"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      {bubbles.map((bubble) => {
+        const Icon = typeConfig[bubble.type]?.icon || TrendingUp;
+        return (
+          <div
+            key={bubble.id}
+            className="absolute rounded-full flex flex-col items-center justify-center transition-all duration-100 cursor-move select-none"
+            style={{
+              left: `${bubble.x}px`,
+              top: `${bubble.y}px`,
+              width: `${bubble.size}px`,
+              height: `${bubble.size}px`,
+              background: `radial-gradient(circle at 30% 30%, ${bubble.color}60, ${bubble.color}20)`,
+              boxShadow: `
+                0 0 60px ${bubble.color}40,
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 40px ${bubble.color}20
+              `,
+              border: `4px solid ${bubble.color}`,
+              transform: bubble.isDragging ? 'scale(1.1)' : 'scale(1)',
+            }}
+            onMouseDown={(e) => handleMouseDown(e, bubble.id)}
+          >
+            <div className="flex flex-col items-center gap-4 p-6">
+              <div 
+                className="p-4 rounded-full backdrop-blur-md"
+                style={{
+                  backgroundColor: `${bubble.color}30`,
+                  boxShadow: `0 0 20px ${bubble.color}40`,
+                }}
+              >
+                <Icon className="h-12 w-12" style={{ color: bubble.color }} />
+              </div>
+              <div className="text-center">
+                <div className="font-bold text-foreground text-xl mb-2">
+                  {bubble.label}
+                </div>
+                <div className="text-sm text-muted-foreground font-medium mb-1">
+                  {bubble.type}
+                </div>
+                <div className="text-lg text-foreground font-bold">
+                  {new Intl.NumberFormat("fr-FR", {
+                    style: "currency",
+                    currency: "EUR",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(bubble.value)}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
