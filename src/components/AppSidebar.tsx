@@ -16,11 +16,6 @@ const navigation = [{
   icon: Diamond,
   path: "/assets"
 }, {
-  id: "debts",
-  label: "Debts",
-  icon: CreditCard,
-  path: "/debts"
-}, {
   id: "invest",
   label: "Invest",
   icon: TrendingUp,

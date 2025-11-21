@@ -39,7 +39,6 @@ const App = () => (
                       <Routes>
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/assets" element={<Index />} />
-                        <Route path="/debts" element={<Debts />} />
                         <Route path="/invest" element={<Invest />} />
                         <Route path="/recap" element={<Recap />} />
                         <Route path="/fast-forward" element={<FastForward />} />
