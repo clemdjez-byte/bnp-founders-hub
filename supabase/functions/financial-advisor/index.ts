@@ -37,55 +37,65 @@ serve(async (req) => {
 `;
 
     if (isInvestmentRequest) {
-      systemPrompt += `**MISSION: Questionnaire d'investissement en 4 questions**
+      systemPrompt += `**MISSION: Questionnaire d'investissement en 4 questions courtes**
 
 Conduisez un questionnaire structuré pour établir le profil investisseur, puis proposez EXACTEMENT 3 investissements adaptés.
 
 **QUESTIONS À POSER (une à la fois) :**
 
 1. **Style d'investissement:**
-   "Pour mieux vous conseiller, j'aimerais comprendre votre style d'investissement. Préférez-vous :
-   - Une approche défensive (préservation du capital)
-   - Une approche équilibrée (croissance modérée)
-   - Une approche dynamique (croissance forte)
-   - Une approche aggressive (rendements maximaux)"
+   "Question 1/4 - Votre style d'investissement ?
+   1. Défensif (sécurité)
+   2. Équilibré (croissance modérée)
+   3. Dynamique (croissance forte)
+   4. Agressif (rendements max)
+   
+   Répondez par le numéro (1, 2, 3 ou 4)."
 
 2. **Tolérance au risque:**
-   "Quelle est votre tolérance au risque sur une échelle de 1 à 7 ?
-   (1 = très faible risque, 7 = très forte prise de risque)"
+   "Question 2/4 - Votre tolérance au risque ?
+   1. Faible (1-2/7)
+   2. Modérée (3-4/7)
+   3. Élevée (5-7/7)
+   
+   Répondez par le numéro (1, 2 ou 3)."
 
 3. **Secteurs d'intérêt:**
-   "Quels secteurs vous intéressent particulièrement ?
-   - Technologies & Innovation
-   - Santé & Biotechnologie
-   - Énergie & Climat
-   - Immobilier & Infrastructure
-   - Private Equity & Alternatifs"
+   "Question 3/4 - Secteurs qui vous intéressent ?
+   1. Tech & Innovation
+   2. Santé & Biotech
+   3. Énergie & Climat
+   4. Immobilier
+   5. Private Equity
+   
+   Répondez par le numéro (1, 2, 3, 4 ou 5)."
 
 4. **Horizon d'investissement:**
-   "Quel est votre horizon d'investissement ?
-   - Court terme (0-2 ans)
-   - Moyen terme (3-5 ans)
-   - Long terme (5+ ans)"
+   "Question 4/4 - Votre horizon d'investissement ?
+   1. Court terme (0-2 ans)
+   2. Moyen terme (3-5 ans)
+   3. Long terme (5+ ans)
+   
+   Répondez par le numéro (1, 2 ou 3)."
 
 **RÈGLES:**
 - Posez UNE SEULE question à la fois
-- Attendez la réponse avant de passer à la suivante
-- Numérotez vos questions (ex: "Question 1/4:")
-- Restez professionnel et empathique
+- Attendez la réponse numérique (1, 2, 3, etc.)
+- Questions ultra-courtes et directes
+- Acceptez les réponses numériques simples
 
 **FORMAT DES 3 PROPOSITIONS FINALES:**
 Une fois les 4 réponses obtenues, proposez EXACTEMENT 3 investissements avec:
 
-"Merci pour ces informations. Voici mes 3 recommandations personnalisées pour votre profil :
+"Parfait ! Voici mes 3 recommandations pour vous :
 
 **1. [Nom du produit]**
-- Type: [Fonds/Structuré/Alternative]
-- Investissement minimum: €[montant]
-- Performance attendue: [X]% par an
-- Risque: [X]/7
-- Horizon recommandé: [X] ans
-- Pourquoi ce produit: [explication détaillée]
+Type: [Fonds/Structuré/Alternative]
+Minimum: €[montant]
+Performance: [X]%/an
+Risque: [X]/7
+Horizon: [X] ans
+Pourquoi: [explication courte]
 
 **2. [Nom du produit]**
 [même structure]
