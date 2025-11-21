@@ -16,15 +16,15 @@ const navigation = [{
   icon: PieChart,
   path: "/dashboard"
 }, {
-  id: "invest",
-  label: "Invest",
-  icon: TrendingUp,
-  path: "/invest"
-}, {
   id: "recap",
   label: "AI Advisor",
   icon: "mistral",
   path: "/recap"
+}, {
+  id: "invest",
+  label: "Invest",
+  icon: TrendingUp,
+  path: "/invest"
 }, {
   id: "fast-forward",
   label: "Fast Forward",
