@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { mockProducts } from "@/lib/mockData";
+import { useNavigate } from "react-router-dom";
 
 const riskColors = {
   1: "bg-green-100 text-green-800",
@@ -14,6 +15,12 @@ const riskColors = {
 };
 
 export default function Invest() {
+  const navigate = useNavigate();
+
+  const handleRequestProposal = (product: typeof mockProducts[0]) => {
+    navigate('/recap', { state: { fromInvest: true, product } });
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -107,7 +114,12 @@ export default function Invest() {
                 </div>
               </div>
 
-              <Button className="w-full bg-secondary hover:bg-secondary/90">Request Proposal</Button>
+              <Button 
+                className="w-full bg-secondary hover:bg-secondary/90"
+                onClick={() => handleRequestProposal(product)}
+              >
+                Request Proposal
+              </Button>
             </div>
           </Card>
         ))}
