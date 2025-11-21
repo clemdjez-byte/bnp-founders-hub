@@ -82,7 +82,9 @@ Risque: [X]/7 | Perf: +[X]%/an | Min: €[montant]
 
 **3. [Nom court]**
 Risque: [X]/7 | Perf: +[X]%/an | Min: €[montant]
-[BUTTON:Voir ce produit|type=[type]&risk=[X]]"`;
+[BUTTON:Voir ce produit|type=[type]&risk=[X]]
+
+[BUTTON:Voir tous les produits d'investissement|/invest]"`;
     } else {
       systemPrompt += `Répondez aux questions du client de manière CONCISE et DIRECTE.
 Maximum 3 phrases par réponse.
