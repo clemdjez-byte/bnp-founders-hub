@@ -244,13 +244,14 @@ export default function Recap() {
                             if (match) {
                               const buttonText = match[1];
                               const params = match[2];
+                              const isFullPath = params.startsWith('/');
                               return (
                                 <Button 
                                   key={idx}
-                                  variant="default" 
+                                  variant={isFullPath ? "outline" : "default"}
                                   className="w-full"
                                   onClick={() => {
-                                    window.location.href = `/invest?${params}`;
+                                    window.location.href = isFullPath ? params : `/invest?${params}`;
                                   }}
                                 >
                                   {buttonText}
