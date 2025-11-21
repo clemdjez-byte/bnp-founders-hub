@@ -1,29 +1,29 @@
 export const mockNetWorthData = [
-  { date: "Jan", value: 1200000 },
-  { date: "Feb", value: 1250000 },
-  { date: "Mar", value: 1280000 },
-  { date: "Apr", value: 1320000 },
-  { date: "May", value: 1380000 },
-  { date: "Jun", value: 1420000 },
-  { date: "Jul", value: 1450000 },
-  { date: "Aug", value: 1480000 },
-  { date: "Sep", value: 1520000 },
-  { date: "Oct", value: 1560000 },
-  { date: "Nov", value: 1620000 },
-  { date: "Dec", value: 1680000 },
+  { date: "Jan", value: 7200000 },
+  { date: "Feb", value: 7450000 },
+  { date: "Mar", value: 7680000 },
+  { date: "Apr", value: 7920000 },
+  { date: "May", value: 8180000 },
+  { date: "Jun", value: 8420000 },
+  { date: "Jul", value: 8650000 },
+  { date: "Aug", value: 8880000 },
+  { date: "Sep", value: 8720000 },
+  { date: "Oct", value: 8860000 },
+  { date: "Nov", value: 8920000 },
+  { date: "Dec", value: 9017000 },
 ];
 
 export const mockAllocationByClass = [
-  { name: "Stocks & ETFs", value: 580000, percentage: 35 },
-  { name: "Funds", value: 420000, percentage: 25 },
-  { name: "Cash", value: 330000, percentage: 20 },
-  { name: "Crypto", value: 165000, percentage: 10 },
-  { name: "Real Estate", value: 165000, percentage: 10 },
+  { name: "Cash", value: 6205000, percentage: 64 },
+  { name: "Real Estate", value: 1570000, percentage: 16 },
+  { name: "Stocks & ETFs", value: 1175000, percentage: 12 },
+  { name: "Crypto", value: 425000, percentage: 4 },
+  { name: "Funds", value: 280000, percentage: 3 },
 ];
 
 export const mockAllocationByProfile = [
-  { name: "Personal", value: 920000, percentage: 55 },
-  { name: "Company", value: 750000, percentage: 45 },
+  { name: "Personal", value: 8080000, percentage: 84 },
+  { name: "Company", value: 1575000, percentage: 16 },
 ];
 
 export const mockAssets = [
@@ -212,7 +212,7 @@ export const mockAssets = [
     type: "Cash Available",
     label: "Cash Available",
     entity: "Personal",
-    value: 500000,
+    value: 6000000,
     currency: "EUR",
     performance: "0%",
     isPositive: true,
