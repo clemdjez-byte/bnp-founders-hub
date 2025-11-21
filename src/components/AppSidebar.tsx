@@ -26,7 +26,7 @@ const navigation = [
   { id: "assets", label: "Assets", icon: Diamond, path: "/assets" },
   { id: "debts", label: "Debts", icon: CreditCard, path: "/debts" },
   { id: "invest", label: "Invest", icon: TrendingUp, path: "/invest" },
-  { id: "recap", label: "Recap", icon: Rewind, path: "/recap" },
+  { id: "recap", label: "AI Advisor", icon: Rewind, path: "/recap" },
   { id: "fast-forward", label: "Fast Forward", icon: FastForward, path: "/fast-forward" },
   { id: "contact", label: "Contact Banker", icon: Phone, path: "/contact" },
 ];
