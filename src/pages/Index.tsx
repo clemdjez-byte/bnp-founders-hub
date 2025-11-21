@@ -49,7 +49,7 @@ const typeConfig: { [key: string]: { color: string } } = {
   "Cash": { color: "#00F5A0" },       // Bright green
   "Crypto": { color: "#00DC82" },     // BNP Green
   "Real Estate": { color: "#00A85E" }, // Deep green
-  "Cash Available": { color: "#3b82f6" }, // Blue
+  "Cash Available": { color: "#FFD700" }, // Gold/Yellow
 };
 
 const Index = () => {
