@@ -37,7 +37,7 @@ const App = () => (
                     </header>
                     <div className="p-8">
                       <Routes>
-                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/dashboard" element={<Index />} />
                         <Route path="/assets" element={<Assets />} />
                         <Route path="/debts" element={<Debts />} />
                         <Route path="/invest" element={<Invest />} />
