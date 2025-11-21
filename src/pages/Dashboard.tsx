@@ -12,7 +12,6 @@ export default function Dashboard() {
   const totalAssets = 1920000;
   const totalDebts = 240000;
   const cashOnHand = 330000;
-  const investableAssets = 1350000;
 
   return (
     <div className="space-y-8">
@@ -22,7 +21,7 @@ export default function Dashboard() {
       </div>
 
       {/* KPI Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <KPICard
           title="Net Worth"
           value={formatCurrency(currentNetWorth)}
@@ -51,18 +50,6 @@ export default function Dashboard() {
           change="+€45,000"
           changePercent="+16%"
           isPositive={true}
-        />
-        <KPICard
-          title="Investable Assets"
-          value={formatCurrency(investableAssets)}
-          change="+€215,000"
-          changePercent="+19%"
-          isPositive={true}
-        />
-        <KPICard
-          title="Uninvested Cash"
-          value={formatCurrency(cashOnHand)}
-          subtitle="Available for investment"
         />
       </div>
 
