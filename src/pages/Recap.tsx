@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Loader2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "react-router-dom";
 
 type Message = {
   role: "user" | "assistant";
@@ -12,11 +13,20 @@ type Message = {
 };
 
 export default function Recap() {
+  const location = useLocation();
+  const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+
+  useEffect(() => {
+    if (location.state?.fromInvest) {
+      const product = location.state.product;
+      const initialMessage = `Je souhaite investir dans ${product.name}. Pouvez-vous me poser quelques questions pour mieux comprendre mon profil investisseur ?`;
+      handleSend(initialMessage);
+    }
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -109,10 +119,11 @@ export default function Recap() {
     }
   };
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleSend = async (customMessage?: string) => {
+    const messageContent = customMessage || input.trim();
+    if (!messageContent || isLoading) return;
 
-    const userMessage: Message = { role: "user", content: input.trim() };
+    const userMessage: Message = { role: "user", content: messageContent };
     const newMessages = [...messages, userMessage];
     
     setMessages(newMessages);
@@ -231,7 +242,7 @@ export default function Recap() {
             disabled={isLoading}
           />
           <Button
-            onClick={handleSend}
+            onClick={() => handleSend()}
             disabled={!input.trim() || isLoading}
             size="icon"
             className="h-full aspect-square"
