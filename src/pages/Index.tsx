@@ -241,6 +241,19 @@ const Index = () => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
+      {/* Total valorisation en haut à droite */}
+      <div className="fixed top-8 right-8 z-50 backdrop-blur-xl bg-card/50 border border-border/50 rounded-2xl px-6 py-4 shadow-lg">
+        <p className="text-xs text-muted-foreground mb-1">Total Assets</p>
+        <p className="text-3xl font-bold text-primary glow-primary-sm">
+          {new Intl.NumberFormat("fr-FR", {
+            style: "currency",
+            currency: "EUR",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(bubbles.reduce((sum, b) => sum + b.value, 0))}
+        </p>
+      </div>
+
       {bubbles.map((bubble) => {
         const logoSrc = logoMap[bubble.logo];
         return (
