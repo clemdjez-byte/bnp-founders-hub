@@ -207,6 +207,18 @@ export const mockAssets = [
     allocation: 36.9,
     logo: "real-estate"
   },
+  {
+    id: "16",
+    type: "Cash Available",
+    label: "Cash Available",
+    entity: "Personal",
+    value: 250000,
+    currency: "EUR",
+    performance: "0%",
+    isPositive: true,
+    allocation: 0,
+    logo: "cash"
+  },
 ];
 
 export const mockDebts = [

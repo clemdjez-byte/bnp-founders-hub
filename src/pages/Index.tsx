@@ -49,6 +49,7 @@ const typeConfig: { [key: string]: { color: string } } = {
   "Cash": { color: "#00F5A0" },       // Bright green
   "Crypto": { color: "#00DC82" },     // BNP Green
   "Real Estate": { color: "#00A85E" }, // Deep green
+  "Cash Available": { color: "#DC143C" }, // Red
 };
 
 const Index = () => {
@@ -309,6 +310,18 @@ const Index = () => {
                     maximumFractionDigits: 0,
                   }).format(bubble.value)}
                 </div>
+                {bubble.type === "Cash Available" && (
+                  <button
+                    className="mt-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-lg"
+                    style={{ fontSize: `${Math.max(10, bubble.size * 0.06)}px` }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = "/invest";
+                    }}
+                  >
+                    Invest
+                  </button>
+                )}
               </div>
             </div>
           </div>
