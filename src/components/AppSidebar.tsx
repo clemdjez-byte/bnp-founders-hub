@@ -5,11 +5,11 @@ import {
   Diamond,
   CreditCard,
   TrendingUp,
-  Rewind,
   FastForward,
   Phone,
 } from "lucide-react";
 import bnpLogo from "@/assets/bnp-logo.png";
+import mistralLogo from "@/assets/mistral-logo.svg";
 
 import {
   Sidebar,
@@ -27,7 +27,7 @@ const navigation = [
   { id: "assets", label: "Assets", icon: Diamond, path: "/assets" },
   { id: "debts", label: "Debts", icon: CreditCard, path: "/debts" },
   { id: "invest", label: "Invest", icon: TrendingUp, path: "/invest" },
-  { id: "recap", label: "AI Advisor", icon: Rewind, path: "/recap" },
+  { id: "recap", label: "AI Advisor", icon: "mistral", path: "/recap" },
   { id: "fast-forward", label: "Fast Forward", icon: FastForward, path: "/fast-forward" },
   { id: "contact", label: "Contact Banker", icon: Phone, path: "/contact" },
 ];
@@ -62,7 +62,11 @@ export function AppSidebar() {
                             : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
                         }`}
                       >
-                        <Icon className="h-5 w-5" />
+                        {Icon === "mistral" ? (
+                          <img src={mistralLogo} alt="Mistral AI" className="h-5 w-5" />
+                        ) : (
+                          <Icon className="h-5 w-5" />
+                        )}
                         {open && <span className="font-medium">{item.label}</span>}
                       </NavLink>
                     </SidebarMenuButton>
