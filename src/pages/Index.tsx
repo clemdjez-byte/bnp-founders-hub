@@ -266,7 +266,7 @@ const Index = () => {
           >
             <div className="flex flex-col items-center gap-3 p-6">
               <div 
-                className="p-4 rounded-2xl backdrop-blur-md bg-white/90 shadow-xl"
+                className="p-4 rounded-2xl backdrop-blur-md shadow-xl"
                 style={{
                   boxShadow: `0 0 30px ${bubble.color}30`,
                 }}
