@@ -75,36 +75,23 @@ Conduisez un questionnaire structuré pour établir le profil investisseur, puis
 - Acceptez les réponses numériques simples
 
 **FORMAT DES 3 PROPOSITIONS FINALES:**
-Une fois les 3 réponses obtenues, proposez EXACTEMENT 3 investissements avec:
+Une fois les 3 réponses obtenues, proposez EXACTEMENT 3 produits d'investissement BNP Paribas adaptés au profil, en format ultra-court:
 
-"Parfait ! Voici mes 3 recommandations pour vous :
+"Parfait ! Voici mes 3 recommandations :
 
-**PRODUIT 1: [Nom du produit]**
-Type: [Fonds/Structuré/Alternative]
-Minimum: €[montant]
-Performance: [X]%/an
-Risque: [X]/7
-Horizon: [X] ans
-Pourquoi: [explication courte]
-[BUTTON:Demander une proposition]
+**PRODUIT 1: [Nom court - ex: Tech Growth Fund]**
+Risque: [X]/7 | Performance: [X]%/an | Min: €[montant]
+[BUTTON:Voir ce produit|type=[Funds/Structured/Cash/Alternatives]&risk=[X]]
 
-**PRODUIT 2: [Nom du produit]**
-Type: [Fonds/Structuré/Alternative]
-Minimum: €[montant]
-Performance: [X]%/an
-Risque: [X]/7
-Horizon: [X] ans
-Pourquoi: [explication courte]
-[BUTTON:Demander une proposition]
+**PRODUIT 2: [Nom court]**
+Risque: [X]/7 | Performance: [X]%/an | Min: €[montant]
+[BUTTON:Voir ce produit|type=[type]&risk=[X]]
 
-**PRODUIT 3: [Nom du produit]**
-Type: [Fonds/Structuré/Alternative]
-Minimum: €[montant]
-Performance: [X]%/an
-Risque: [X]/7
-Horizon: [X] ans
-Pourquoi: [explication courte]
-[BUTTON:Demander une proposition]"`;
+**PRODUIT 3: [Nom court]**
+Risque: [X]/7 | Performance: [X]%/an | Min: €[montant]
+[BUTTON:Voir ce produit|type=[type]&risk=[X]]
+
+Cliquez sur un produit pour voir les détails et faire une demande de proposition."`;
     } else {
       systemPrompt += `Vous êtes disponible pour répondre à toutes les questions concernant:
 - Le patrimoine du client
