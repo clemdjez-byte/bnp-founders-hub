@@ -9,6 +9,7 @@ import {
   FastForward,
   Phone,
 } from "lucide-react";
+import bnpLogo from "@/assets/bnp-logo.png";
 
 import {
   Sidebar,
@@ -39,9 +40,7 @@ export function AppSidebar() {
     <Sidebar className="border-r border-sidebar-border">
       <SidebarContent className="bg-sidebar">
         <div className="p-6 border-b border-sidebar-border">
-          <h1 className="text-lg font-semibold text-sidebar-primary-foreground">
-            BNP Private Founders
-          </h1>
+          <img src={bnpLogo} alt="BNP Paribas Asset Management" className="h-12 w-auto" />
         </div>
 
         <SidebarGroup>
