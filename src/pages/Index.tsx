@@ -44,11 +44,11 @@ const logoMap: { [key: string]: string } = {
 };
 
 const typeConfig: { [key: string]: { color: string } } = {
-  "Stock": { color: "#3b82f6" },
-  "Fund": { color: "#8b5cf6" },
-  "Cash": { color: "#10b981" },
-  "Crypto": { color: "#f59e0b" },
-  "Real Estate": { color: "#ef4444" },
+  "Stock": { color: "#00DC82" },      // BNP Green
+  "Fund": { color: "#00B86E" },       // Darker green
+  "Cash": { color: "#00F5A0" },       // Bright green
+  "Crypto": { color: "#00DC82" },     // BNP Green
+  "Real Estate": { color: "#00A85E" }, // Deep green
 };
 
 const Index = () => {
@@ -236,69 +236,102 @@ const Index = () => {
 
   return (
     <div 
-      className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background via-background to-muted cursor-grab active:cursor-grabbing"
+      className="relative min-h-screen w-full overflow-hidden bg-background mesh-gradient"
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {bubbles.map((bubble) => {
-        const logoSrc = logoMap[bubble.logo];
-        return (
-          <div
-            key={bubble.id}
-            className="absolute rounded-full flex flex-col items-center justify-center transition-all duration-100 cursor-move select-none hover:scale-105 overflow-hidden"
-            style={{
-              left: `${bubble.x}px`,
-              top: `${bubble.y}px`,
-              width: `${bubble.size}px`,
-              height: `${bubble.size}px`,
-              background: `radial-gradient(circle at 30% 30%, ${bubble.color}80, ${bubble.color}30)`,
-              boxShadow: `
-                0 0 80px ${bubble.color}50,
-                0 20px 80px rgba(0, 0, 0, 0.4),
-                inset 0 0 60px ${bubble.color}30,
-                0 0 120px ${bubble.color}20
-              `,
-              border: `5px solid ${bubble.color}`,
-              transform: bubble.isDragging ? 'scale(1.15)' : 'scale(1)',
-            }}
-            onMouseDown={(e) => handleMouseDown(e, bubble.id)}
-          >
-            <div className="flex flex-col items-center justify-center gap-2 w-full h-full p-4">
-              <div className="flex-shrink-0">
-                <img 
-                  src={logoSrc} 
-                  alt={bubble.label}
-                  className="object-contain"
-                  style={{
-                    width: `${bubble.size * 0.3}px`,
-                    height: `${bubble.size * 0.3}px`,
-                    maxWidth: '80px',
-                    maxHeight: '80px',
-                  }}
-                  draggable="false"
-                />
-              </div>
-              <div className="text-center flex-shrink-0 w-full px-2">
-                <div className="font-bold text-foreground mb-0.5 drop-shadow-lg truncate" style={{ fontSize: `${Math.max(12, bubble.size * 0.08)}px` }}>
-                  {bubble.label}
+      {/* Premium header */}
+      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/50 border-b border-border/50">
+        <div className="container mx-auto px-6 py-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-glow glow-primary-sm flex items-center justify-center">
+              <span className="text-background font-bold text-lg">P</span>
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-foreground">Portfolio</h1>
+              <p className="text-xs text-muted-foreground">Asset Management</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-8">
+            <div className="text-right">
+              <p className="text-sm text-muted-foreground">Total Assets</p>
+              <p className="text-2xl font-bold text-foreground">
+                {new Intl.NumberFormat("fr-FR", {
+                  style: "currency",
+                  currency: "EUR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(bubbles.reduce((sum, b) => sum + b.value, 0))}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bubbles with premium styling */}
+      <div className="pt-28">
+        {bubbles.map((bubble) => {
+          const logoSrc = logoMap[bubble.logo];
+          return (
+            <div
+              key={bubble.id}
+              className="absolute rounded-full flex flex-col items-center justify-center cursor-move select-none overflow-hidden backdrop-blur-sm transition-all duration-200"
+              style={{
+                left: `${bubble.x}px`,
+                top: `${bubble.y}px`,
+                width: `${bubble.size}px`,
+                height: `${bubble.size}px`,
+                background: `radial-gradient(circle at 30% 30%, ${bubble.color}15, ${bubble.color}08)`,
+                boxShadow: `
+                  0 0 60px ${bubble.color}30,
+                  0 8px 32px rgba(0, 0, 0, 0.4),
+                  inset 0 0 40px ${bubble.color}10,
+                  0 0 100px ${bubble.color}15
+                `,
+                border: `2px solid ${bubble.color}40`,
+                transform: bubble.isDragging ? 'scale(1.1)' : 'scale(1)',
+              }}
+              onMouseDown={(e) => handleMouseDown(e, bubble.id)}
+            >
+              <div className="flex flex-col items-center justify-center gap-2 w-full h-full p-4">
+                <div className="flex-shrink-0 relative">
+                  <div className="absolute inset-0 blur-xl opacity-40" style={{ background: bubble.color }} />
+                  <img 
+                    src={logoSrc} 
+                    alt={bubble.label}
+                    className="object-contain relative z-10"
+                    style={{
+                      width: `${bubble.size * 0.3}px`,
+                      height: `${bubble.size * 0.3}px`,
+                      maxWidth: '80px',
+                      maxHeight: '80px',
+                      filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))',
+                    }}
+                    draggable="false"
+                  />
                 </div>
-                <div className="text-muted-foreground font-medium mb-0.5 drop-shadow-lg truncate" style={{ fontSize: `${Math.max(10, bubble.size * 0.05)}px` }}>
-                  {bubble.type}
-                </div>
-                <div className="text-foreground font-bold drop-shadow-lg truncate" style={{ fontSize: `${Math.max(11, bubble.size * 0.06)}px` }}>
-                  {new Intl.NumberFormat("fr-FR", {
-                    style: "currency",
-                    currency: "EUR",
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  }).format(bubble.value)}
+                <div className="text-center flex-shrink-0 w-full px-2">
+                  <div className="font-bold text-foreground mb-0.5 drop-shadow-lg truncate" style={{ fontSize: `${Math.max(12, bubble.size * 0.08)}px` }}>
+                    {bubble.label}
+                  </div>
+                  <div className="text-muted-foreground font-medium mb-0.5 drop-shadow-lg truncate opacity-70" style={{ fontSize: `${Math.max(10, bubble.size * 0.05)}px` }}>
+                    {bubble.type}
+                  </div>
+                  <div className="text-foreground font-bold drop-shadow-lg truncate" style={{ fontSize: `${Math.max(11, bubble.size * 0.06)}px`, color: bubble.color }}>
+                    {new Intl.NumberFormat("fr-FR", {
+                      style: "currency",
+                      currency: "EUR",
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    }).format(bubble.value)}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
