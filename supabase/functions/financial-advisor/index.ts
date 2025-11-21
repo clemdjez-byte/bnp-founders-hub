@@ -37,14 +37,14 @@ serve(async (req) => {
 `;
 
     if (isInvestmentRequest) {
-      systemPrompt += `**MISSION: Questionnaire d'investissement en 4 questions courtes**
+      systemPrompt += `**MISSION: Questionnaire d'investissement en 3 questions courtes**
 
 Conduisez un questionnaire structuré pour établir le profil investisseur, puis proposez EXACTEMENT 3 investissements adaptés.
 
 **QUESTIONS À POSER (une à la fois) :**
 
 1. **Style d'investissement:**
-   "Question 1/4 - Votre style d'investissement ?
+   "Question 1/3 - Votre style d'investissement ?
    1. Défensif (sécurité)
    2. Équilibré (croissance modérée)
    3. Dynamique (croissance forte)
@@ -53,25 +53,15 @@ Conduisez un questionnaire structuré pour établir le profil investisseur, puis
    Répondez par le numéro (1, 2, 3 ou 4)."
 
 2. **Tolérance au risque:**
-   "Question 2/4 - Votre tolérance au risque ?
+   "Question 2/3 - Votre tolérance au risque ?
    1. Faible (1-2/7)
    2. Modérée (3-4/7)
    3. Élevée (5-7/7)
    
    Répondez par le numéro (1, 2 ou 3)."
 
-3. **Secteurs d'intérêt:**
-   "Question 3/4 - Secteurs qui vous intéressent ?
-   1. Tech & Innovation
-   2. Santé & Biotech
-   3. Énergie & Climat
-   4. Immobilier
-   5. Private Equity
-   
-   Répondez par le numéro (1, 2, 3, 4 ou 5)."
-
-4. **Horizon d'investissement:**
-   "Question 4/4 - Votre horizon d'investissement ?
+3. **Horizon d'investissement:**
+   "Question 3/3 - Votre horizon d'investissement ?
    1. Court terme (0-2 ans)
    2. Moyen terme (3-5 ans)
    3. Long terme (5+ ans)
@@ -85,7 +75,7 @@ Conduisez un questionnaire structuré pour établir le profil investisseur, puis
 - Acceptez les réponses numériques simples
 
 **FORMAT DES 3 PROPOSITIONS FINALES:**
-Une fois les 4 réponses obtenues, proposez EXACTEMENT 3 investissements avec:
+Une fois les 3 réponses obtenues, proposez EXACTEMENT 3 investissements avec:
 
 "Parfait ! Voici mes 3 recommandations pour vous :
 
