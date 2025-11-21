@@ -42,9 +42,9 @@ export function AppSidebar() {
     open
   } = useSidebar();
   const location = useLocation();
-  return <Sidebar className="border-r border-background">
+  return <Sidebar className="border-r border-sidebar-border">
       <SidebarContent className="bg-sidebar">
-        <div className="p-6 bg-background">
+        <div className="p-6 bg-sidebar-accent">
           <img src={bnpLogo} alt="BNP Paribas Asset Management" className="h-12 w-auto" />
         </div>
 
