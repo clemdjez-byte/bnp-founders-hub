@@ -236,7 +236,32 @@ export default function Recap() {
                         : "bg-muted"
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    {message.role === "assistant" && message.content.includes("[BUTTON:") ? (
+                      <div className="space-y-4">
+                        {message.content.split("[BUTTON:").map((part, idx) => {
+                          if (idx === 0) {
+                            return <p key={idx} className="text-sm whitespace-pre-wrap">{part}</p>;
+                          }
+                          const [buttonText, ...rest] = part.split("]");
+                          return (
+                            <div key={idx} className="space-y-2">
+                              <Button 
+                                variant="default" 
+                                className="w-full"
+                                onClick={() => {
+                                  window.location.href = "/contact";
+                                }}
+                              >
+                                {buttonText}
+                              </Button>
+                              {rest.length > 0 && <p className="text-sm whitespace-pre-wrap">{rest.join("]")}</p>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    )}
                   </div>
                 </div>
               ))}

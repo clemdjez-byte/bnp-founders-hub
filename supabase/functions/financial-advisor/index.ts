@@ -79,19 +79,32 @@ Une fois les 3 réponses obtenues, proposez EXACTEMENT 3 investissements avec:
 
 "Parfait ! Voici mes 3 recommandations pour vous :
 
-**1. [Nom du produit]**
+**PRODUIT 1: [Nom du produit]**
 Type: [Fonds/Structuré/Alternative]
 Minimum: €[montant]
 Performance: [X]%/an
 Risque: [X]/7
 Horizon: [X] ans
 Pourquoi: [explication courte]
+[BUTTON:Demander une proposition]
 
-**2. [Nom du produit]**
-[même structure]
+**PRODUIT 2: [Nom du produit]**
+Type: [Fonds/Structuré/Alternative]
+Minimum: €[montant]
+Performance: [X]%/an
+Risque: [X]/7
+Horizon: [X] ans
+Pourquoi: [explication courte]
+[BUTTON:Demander une proposition]
 
-**3. [Nom du produit]**
-[même structure]"`;
+**PRODUIT 3: [Nom du produit]**
+Type: [Fonds/Structuré/Alternative]
+Minimum: €[montant]
+Performance: [X]%/an
+Risque: [X]/7
+Horizon: [X] ans
+Pourquoi: [explication courte]
+[BUTTON:Demander une proposition]"`;
     } else {
       systemPrompt += `Vous êtes disponible pour répondre à toutes les questions concernant:
 - Le patrimoine du client
