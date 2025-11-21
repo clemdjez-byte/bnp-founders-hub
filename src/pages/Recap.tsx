@@ -21,7 +21,20 @@ export default function Recap() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (location.state?.fromInvest) {
+    const searchParams = new URLSearchParams(location.search);
+    const amount = searchParams.get('amount');
+    
+    if (amount) {
+      const formattedAmount = new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(Number(amount));
+      
+      const initialMessage = `J'ai ${formattedAmount} à investir. Pouvez-vous me poser quelques questions pour mieux comprendre mon profil investisseur et me proposer des produits d'investissement adaptés ?`;
+      handleSend(initialMessage);
+    } else if (location.state?.fromInvest) {
       const product = location.state.product;
       const initialMessage = `Je souhaite investir dans ${product.name}. Pouvez-vous me poser quelques questions pour mieux comprendre mon profil investisseur ?`;
       handleSend(initialMessage);

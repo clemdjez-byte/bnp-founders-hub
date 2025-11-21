@@ -350,7 +350,7 @@ const Index = () => {
                     style={{ fontSize: `${Math.max(10, bubble.size * 0.06)}px` }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.location.href = "/invest";
+                      window.location.href = `/recap?amount=${bubble.value}`;
                     }}
                   >
                     Invest
