@@ -60,8 +60,10 @@ const Index = () => {
   useEffect(() => {
     const initialBubbles: Bubble[] = mockAssets.map((asset) => {
       const size = Math.max(150, Math.min(400, asset.value / 2500));
+      const topMargin = 150; // Space for header
+      const bottomMargin = 50; // Safety margin at bottom
       const maxX = Math.max(0, window.innerWidth - size);
-      const maxY = Math.max(0, window.innerHeight - size);
+      const maxY = Math.max(0, window.innerHeight - size - topMargin - bottomMargin);
       
       return {
         id: asset.id,
@@ -71,7 +73,7 @@ const Index = () => {
         color: typeConfig[asset.type]?.color || "#3b82f6",
         logo: asset.logo || "cash",
         x: Math.max(0, Math.min(maxX, Math.random() * maxX)),
-        y: Math.max(0, Math.min(maxY, Math.random() * maxY)),
+        y: Math.max(topMargin, Math.min(maxY + topMargin, topMargin + Math.random() * maxY)),
         vx: (Math.random() - 0.5) * 1.5,
         vy: (Math.random() - 0.5) * 1.5,
         size,
@@ -154,8 +156,11 @@ const Index = () => {
           let newVx = bubble.vx;
           let newVy = bubble.vy;
 
+          const topMargin = 150; // Space for header
+          const bottomMargin = 50; // Safety margin at bottom
           const maxX = window.innerWidth - bubble.size;
-          const maxY = window.innerHeight - bubble.size;
+          const maxY = window.innerHeight - bubble.size - bottomMargin;
+          const minY = topMargin;
 
           // Wall collision with stricter bounds
           if (newX <= 0) {
@@ -166,9 +171,9 @@ const Index = () => {
             newX = maxX;
           }
           
-          if (newY <= 0) {
+          if (newY <= minY) {
             newVy = Math.abs(newVy) * 0.8;
-            newY = 0;
+            newY = minY;
           } else if (newY >= maxY) {
             newVy = -Math.abs(newVy) * 0.8;
             newY = maxY;
@@ -176,7 +181,7 @@ const Index = () => {
 
           // Ensure bounds are strictly enforced
           newX = Math.max(0, Math.min(maxX, newX));
-          newY = Math.max(0, Math.min(maxY, newY));
+          newY = Math.max(minY, Math.min(maxY, newY));
 
           return {
             ...bubble,
@@ -225,12 +230,15 @@ const Index = () => {
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!draggedBubble) return;
 
+    const topMargin = 150;
+    const bottomMargin = 50;
+
     setBubbles(prev => prev.map(b => {
       if (b.id === draggedBubble) {
         return {
           ...b,
           x: Math.max(0, Math.min(window.innerWidth - b.size, e.clientX - dragOffset.current.x)),
-          y: Math.max(0, Math.min(window.innerHeight - b.size, e.clientY - dragOffset.current.y)),
+          y: Math.max(topMargin, Math.min(window.innerHeight - b.size - bottomMargin, e.clientY - dragOffset.current.y)),
         };
       }
       return b;
