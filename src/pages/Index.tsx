@@ -60,6 +60,8 @@ const Index = () => {
   useEffect(() => {
     const initialBubbles: Bubble[] = mockAssets.map((asset) => {
       const size = Math.max(150, Math.min(400, asset.value / 2500));
+      const maxX = Math.max(0, window.innerWidth - size);
+      const maxY = Math.max(0, window.innerHeight - size);
       
       return {
         id: asset.id,
@@ -68,8 +70,8 @@ const Index = () => {
         type: asset.type,
         color: typeConfig[asset.type]?.color || "#3b82f6",
         logo: asset.logo || "cash",
-        x: Math.random() * (window.innerWidth - size),
-        y: Math.random() * (window.innerHeight - size),
+        x: Math.max(0, Math.min(maxX, Math.random() * maxX)),
+        y: Math.max(0, Math.min(maxY, Math.random() * maxY)),
         vx: (Math.random() - 0.5) * 1.5,
         vy: (Math.random() - 0.5) * 1.5,
         size,
@@ -152,15 +154,29 @@ const Index = () => {
           let newVx = bubble.vx;
           let newVy = bubble.vy;
 
-          // Wall collision
-          if (newX <= 0 || newX >= window.innerWidth - bubble.size) {
-            newVx = -newVx * 0.8;
-            newX = Math.max(0, Math.min(window.innerWidth - bubble.size, newX));
+          const maxX = window.innerWidth - bubble.size;
+          const maxY = window.innerHeight - bubble.size;
+
+          // Wall collision with stricter bounds
+          if (newX <= 0) {
+            newVx = Math.abs(newVx) * 0.8;
+            newX = 0;
+          } else if (newX >= maxX) {
+            newVx = -Math.abs(newVx) * 0.8;
+            newX = maxX;
           }
-          if (newY <= 0 || newY >= window.innerHeight - bubble.size) {
-            newVy = -newVy * 0.8;
-            newY = Math.max(0, Math.min(window.innerHeight - bubble.size, newY));
+          
+          if (newY <= 0) {
+            newVy = Math.abs(newVy) * 0.8;
+            newY = 0;
+          } else if (newY >= maxY) {
+            newVy = -Math.abs(newVy) * 0.8;
+            newY = maxY;
           }
+
+          // Ensure bounds are strictly enforced
+          newX = Math.max(0, Math.min(maxX, newX));
+          newY = Math.max(0, Math.min(maxY, newY));
 
           return {
             ...bubble,
