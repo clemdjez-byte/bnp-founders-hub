@@ -246,7 +246,7 @@ const Index = () => {
         return (
           <div
             key={bubble.id}
-            className="absolute rounded-full flex flex-col items-center justify-center transition-all duration-100 cursor-move select-none hover:scale-105"
+            className="absolute rounded-full flex flex-col items-center justify-center transition-all duration-100 cursor-move select-none hover:scale-105 overflow-hidden"
             style={{
               left: `${bubble.x}px`,
               top: `${bubble.y}px`,
@@ -264,25 +264,29 @@ const Index = () => {
             }}
             onMouseDown={(e) => handleMouseDown(e, bubble.id)}
           >
-            <div className="flex flex-col items-center gap-3 p-6">
-              <div 
-                className="p-4 rounded-2xl"
-              >
+            <div className="flex flex-col items-center justify-center gap-2 w-full h-full p-4">
+              <div className="flex-shrink-0">
                 <img 
                   src={logoSrc} 
                   alt={bubble.label}
-                  className="h-16 w-16 object-contain"
+                  className="object-contain"
+                  style={{
+                    width: `${bubble.size * 0.3}px`,
+                    height: `${bubble.size * 0.3}px`,
+                    maxWidth: '80px',
+                    maxHeight: '80px',
+                  }}
                   draggable="false"
                 />
               </div>
-              <div className="text-center rounded-lg p-3">
-                <div className="font-bold text-foreground text-lg mb-1 drop-shadow-lg">
+              <div className="text-center flex-shrink-0 w-full px-2">
+                <div className="font-bold text-foreground mb-0.5 drop-shadow-lg truncate" style={{ fontSize: `${Math.max(12, bubble.size * 0.08)}px` }}>
                   {bubble.label}
                 </div>
-                <div className="text-xs text-muted-foreground font-medium mb-1.5 drop-shadow-lg">
+                <div className="text-muted-foreground font-medium mb-0.5 drop-shadow-lg truncate" style={{ fontSize: `${Math.max(10, bubble.size * 0.05)}px` }}>
                   {bubble.type}
                 </div>
-                <div className="text-base text-foreground font-bold drop-shadow-lg">
+                <div className="text-foreground font-bold drop-shadow-lg truncate" style={{ fontSize: `${Math.max(11, bubble.size * 0.06)}px` }}>
                   {new Intl.NumberFormat("fr-FR", {
                     style: "currency",
                     currency: "EUR",
