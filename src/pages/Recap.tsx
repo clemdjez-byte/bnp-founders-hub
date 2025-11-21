@@ -296,6 +296,12 @@ export default function Recap() {
             )}
           </Button>
         </div>
+        <Button
+          onClick={() => window.location.href = '/invest'}
+          className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white"
+        >
+          Invest
+        </Button>
       </Card>
     </div>
   );
