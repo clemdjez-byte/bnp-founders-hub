@@ -4,11 +4,12 @@ import { PieChart, Diamond, CreditCard, TrendingUp, FastForward, Phone } from "l
 import bnpLogo from "@/assets/bnp-logo.png";
 import mistralLogo from "@/assets/mistral-logo.svg";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
+
 const navigation = [{
   id: "dashboard",
   label: "Net Worth",
   icon: PieChart,
-  path: "/"
+  path: "/dashboard"
 }, {
   id: "assets",
   label: "Assets",
@@ -40,6 +41,7 @@ const navigation = [{
   icon: Phone,
   path: "/contact"
 }];
+
 export function AppSidebar() {
   const {
     open
