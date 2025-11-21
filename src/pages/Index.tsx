@@ -264,40 +264,25 @@ const Index = () => {
             }}
             onMouseDown={(e) => handleMouseDown(e, bubble.id)}
           >
-            <div className="flex flex-col items-center justify-center gap-2 w-full h-full p-4">
-              <img 
-                src={logoSrc} 
-                alt={bubble.label}
-                className="object-contain"
-                style={{
-                  maxWidth: `${bubble.size * 0.35}px`,
-                  maxHeight: `${bubble.size * 0.35}px`,
-                }}
-                draggable="false"
-              />
-              <div className="text-center">
-                <div 
-                  className="font-bold text-foreground drop-shadow-lg mb-1"
-                  style={{
-                    fontSize: `${Math.max(12, bubble.size * 0.06)}px`,
-                  }}
-                >
+            <div className="flex flex-col items-center gap-3 p-6">
+              <div 
+                className="p-4 rounded-2xl"
+              >
+                <img 
+                  src={logoSrc} 
+                  alt={bubble.label}
+                  className="h-16 w-16 object-contain"
+                  draggable="false"
+                />
+              </div>
+              <div className="text-center rounded-lg p-3">
+                <div className="font-bold text-foreground text-lg mb-1 drop-shadow-lg">
                   {bubble.label}
                 </div>
-                <div 
-                  className="text-muted-foreground font-medium drop-shadow-lg mb-1"
-                  style={{
-                    fontSize: `${Math.max(10, bubble.size * 0.04)}px`,
-                  }}
-                >
+                <div className="text-xs text-muted-foreground font-medium mb-1.5 drop-shadow-lg">
                   {bubble.type}
                 </div>
-                <div 
-                  className="text-foreground font-bold drop-shadow-lg"
-                  style={{
-                    fontSize: `${Math.max(11, bubble.size * 0.05)}px`,
-                  }}
-                >
+                <div className="text-base text-foreground font-bold drop-shadow-lg">
                   {new Intl.NumberFormat("fr-FR", {
                     style: "currency",
                     currency: "EUR",
