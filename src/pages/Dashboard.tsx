@@ -8,10 +8,10 @@ import { mockNetWorthData, mockAllocationByClass, mockAllocationByProfile, forma
 const COLORS = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))"];
 
 export default function Dashboard() {
-  const currentNetWorth = 1680000;
-  const totalAssets = 1920000;
-  const totalDebts = 240000;
-  const cashOnHand = 330000;
+  const currentNetWorth = 9017000;
+  const totalAssets = 9655000;
+  const totalDebts = 638000;
+  const cashOnHand = 6000000;
 
   return (
     <div className="space-y-8">
@@ -25,30 +25,30 @@ export default function Dashboard() {
         <KPICard
           title="Net Worth"
           value={formatCurrency(currentNetWorth)}
-          change="+€280,000"
-          changePercent="+20%"
+          change="+€1,097,000"
+          changePercent="+14%"
           isPositive={true}
           subtitle="Total wealth"
         />
         <KPICard
           title="Assets"
           value={formatCurrency(totalAssets)}
-          change="+€320,000"
-          changePercent="+20%"
+          change="+€1,235,000"
+          changePercent="+15%"
           isPositive={true}
         />
         <KPICard
           title="Debts"
           value={formatCurrency(totalDebts)}
-          change="-€40,000"
-          changePercent="-14%"
+          change="-€138,000"
+          changePercent="-18%"
           isPositive={true}
         />
         <KPICard
           title="Cash on Hand"
           value={formatCurrency(cashOnHand)}
-          change="+€45,000"
-          changePercent="+16%"
+          change="+€1,580,000"
+          changePercent="+36%"
           isPositive={true}
         />
       </div>
