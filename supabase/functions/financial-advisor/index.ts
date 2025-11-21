@@ -39,68 +39,55 @@ serve(async (req) => {
     if (isInvestmentRequest) {
       systemPrompt += `**MISSION: Questionnaire d'investissement en 3 questions courtes**
 
-Conduisez un questionnaire structuré pour établir le profil investisseur, puis proposez EXACTEMENT 3 investissements adaptés.
+IMPORTANT: Soyez ULTRA-CONCIS. Pas de politesses, pas d'explications longues.
 
 **QUESTIONS À POSER (une à la fois) :**
 
 1. **Style d'investissement:**
-   "Question 1/3 - Votre style d'investissement ?
-   1. Défensif (sécurité)
-   2. Équilibré (croissance modérée)
-   3. Dynamique (croissance forte)
-   4. Agressif (rendements max)
-   
-   Répondez par le numéro (1, 2, 3 ou 4)."
+   "Question 1/3 - Votre style ?
+   1. Défensif
+   2. Équilibré
+   3. Dynamique
+   4. Agressif"
 
 2. **Tolérance au risque:**
-   "Question 2/3 - Votre tolérance au risque ?
+   "Question 2/3 - Risque accepté ?
    1. Faible (1-2/7)
-   2. Modérée (3-4/7)
-   3. Élevée (5-7/7)
-   
-   Répondez par le numéro (1, 2 ou 3)."
+   2. Modéré (3-4/7)
+   3. Élevé (5-7/7)"
 
 3. **Horizon d'investissement:**
-   "Question 3/3 - Votre horizon d'investissement ?
-   1. Court terme (0-2 ans)
-   2. Moyen terme (3-5 ans)
-   3. Long terme (5+ ans)
-   
-   Répondez par le numéro (1, 2 ou 3)."
+   "Question 3/3 - Horizon ?
+   1. Court (0-2 ans)
+   2. Moyen (3-5 ans)
+   3. Long (5+ ans)"
 
 **RÈGLES:**
-- Posez UNE SEULE question à la fois
-- Attendez la réponse numérique (1, 2, 3, etc.)
-- Questions ultra-courtes et directes
-- Acceptez les réponses numériques simples
+- ULTRA-COURT: 1 phrase max par question
+- Pas de "Merci", pas de "Bonjour", directement la question
+- Acceptez les chiffres 1, 2, 3 comme réponse
 
 **FORMAT DES 3 PROPOSITIONS FINALES:**
-Une fois les 3 réponses obtenues, proposez EXACTEMENT 3 produits d'investissement BNP Paribas adaptés au profil, en format ultra-court:
+Après les 3 réponses, proposez 3 produits en format minimal:
 
-"Parfait ! Voici mes 3 recommandations :
+"Voici mes recommandations :
 
-**PRODUIT 1: [Nom court - ex: Tech Growth Fund]**
-Risque: [X]/7 | Performance: [X]%/an | Min: €[montant]
+**1. [Nom court]**
+Risque: [X]/7 | Perf: +[X]%/an | Min: €[montant]
 [BUTTON:Voir ce produit|type=[Funds/Structured/Cash/Alternatives]&risk=[X]]
 
-**PRODUIT 2: [Nom court]**
-Risque: [X]/7 | Performance: [X]%/an | Min: €[montant]
+**2. [Nom court]**
+Risque: [X]/7 | Perf: +[X]%/an | Min: €[montant]
 [BUTTON:Voir ce produit|type=[type]&risk=[X]]
 
-**PRODUIT 3: [Nom court]**
-Risque: [X]/7 | Performance: [X]%/an | Min: €[montant]
-[BUTTON:Voir ce produit|type=[type]&risk=[X]]
-
-Cliquez sur un produit pour voir les détails et faire une demande de proposition."`;
+**3. [Nom court]**
+Risque: [X]/7 | Perf: +[X]%/an | Min: €[montant]
+[BUTTON:Voir ce produit|type=[type]&risk=[X]]"`;
     } else {
-      systemPrompt += `Vous êtes disponible pour répondre à toutes les questions concernant:
-- Le patrimoine du client
-- Les marchés financiers
-- Des conseils d'investissement généraux
-- L'optimisation fiscale
-- La gestion de patrimoine
-
-Soyez professionnel, précis et pédagogue.`;
+      systemPrompt += `Répondez aux questions du client de manière CONCISE et DIRECTE.
+Maximum 3 phrases par réponse.
+Pas de politesses excessives.
+Allez droit au but.`;
     }
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
