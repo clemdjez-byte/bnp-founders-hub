@@ -266,10 +266,7 @@ const Index = () => {
           >
             <div className="flex flex-col items-center gap-3 p-6">
               <div 
-                className="p-4 rounded-2xl backdrop-blur-md shadow-xl"
-                style={{
-                  boxShadow: `0 0 30px ${bubble.color}30`,
-                }}
+                className="p-4 rounded-2xl"
               >
                 <img 
                   src={logoSrc} 
@@ -278,14 +275,14 @@ const Index = () => {
                   draggable="false"
                 />
               </div>
-              <div className="text-center bg-background/80 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-                <div className="font-bold text-foreground text-lg mb-1">
+              <div className="text-center rounded-lg p-3">
+                <div className="font-bold text-foreground text-lg mb-1 drop-shadow-lg">
                   {bubble.label}
                 </div>
-                <div className="text-xs text-muted-foreground font-medium mb-1.5">
+                <div className="text-xs text-muted-foreground font-medium mb-1.5 drop-shadow-lg">
                   {bubble.type}
                 </div>
-                <div className="text-base text-foreground font-bold">
+                <div className="text-base text-foreground font-bold drop-shadow-lg">
                   {new Intl.NumberFormat("fr-FR", {
                     style: "currency",
                     currency: "EUR",
