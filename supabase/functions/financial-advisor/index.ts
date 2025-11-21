@@ -23,7 +23,8 @@ serve(async (req) => {
     // Check if this is an investment profile questionnaire
     const lastUserMessage = messages[messages.length - 1]?.content || "";
     const isInvestmentRequest = lastUserMessage.toLowerCase().includes("profil investisseur") || 
-                                lastUserMessage.toLowerCase().includes("investir dans");
+                                lastUserMessage.toLowerCase().includes("investir") ||
+                                lastUserMessage.toLowerCase().includes("à investir");
 
     let systemPrompt = `Vous êtes un conseiller financier premium de BNP Paribas Private Banking.
 
