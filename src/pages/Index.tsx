@@ -265,7 +265,7 @@ const Index = () => {
               <img src={logoSrc} alt={bubble.label} style={{
             maxWidth: `${bubble.size * 0.35}px`,
             maxHeight: `${bubble.size * 0.35}px`
-          }} draggable="false" className="object-cover" />
+          }} draggable="false" className="object-contain" />
               <div className="text-center">
                 <div className="font-bold text-foreground drop-shadow-lg mb-1" style={{
               fontSize: `${Math.max(12, bubble.size * 0.06)}px`
